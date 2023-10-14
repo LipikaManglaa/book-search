@@ -23,6 +23,7 @@ console.log(user)
     if (!user) {
       return res.status(400).json({ message: 'Something is wrong!' });
     }
+    console.log("error")
     const token = signToken(user);
     console.log(token)
     res.json({ token, user });
