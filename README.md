@@ -1,1 +1,3 @@
 # book-search
+
+<!-- This app converts a fully functioning Google Books API search engine built with a RESTful API into a GraphQL API built with Apollo Server. Uses the MERN stack, with a React front end, MongoDB database, and Node.js/Express.js server and API.This application is used for searching for books using the Google books API. A user login and signup, search for books, and save them to their favorites list as well as removing them. -->

@@ -37,6 +37,7 @@ console.log(userFormData)
         variables: { ...userFormData },
       });
 console.log(data)
+
       Auth.login(data.addUser.token);
       // const response = await addUser(userFormData);
 
