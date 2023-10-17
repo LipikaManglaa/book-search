@@ -39,16 +39,7 @@ console.log(userFormData)
 console.log(data)
 
       Auth.login(data.addUser.token);
-      // const response = await addUser(userFormData);
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
-      // const { token, user } = await response.json();
-      // console.log(user);
-      // Auth.login(user.addUser.token);
-      // Auth.login(token);
+     
     } 
     catch (err) {
       console.error(err);
