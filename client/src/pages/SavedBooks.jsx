@@ -9,18 +9,24 @@ import {
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutations";
-import { getMe, deleteBook } from '../utils/API';
+import {saveBook, getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
-const SavedBooks = () => {
+const SavedBooks =() => {
+ 
 
+  
   const { loading, data } = useQuery(GET_ME);
-  const userData = data?.me || {};
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+
+  const userData = data?.me || {};
+
+  // use this to determine if `useEffect()` hook needs to run again
+  const userDataLength = Object.keys(userData).length;
   
 
-  const userDataLength = Object.keys(userData).length;
+  
 
   
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -32,15 +38,11 @@ const SavedBooks = () => {
     }
 
     try {
-      // const response = await removeBook({ variables: { bookId: bookId } });
       const { data } = await removeBook({
         variables: { bookId },
       });
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
 
-
+      // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
       console.error(err);
@@ -48,10 +50,12 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (loading) {
+  if (!userDataLength) {
     return <h2>LOADING...</h2>;
   }
-
+useEffect(()=>{
+  functionData()
+},[token])
   return (
     <>
       <div fluid className="text-light bg-dark p-5">
@@ -60,6 +64,7 @@ const SavedBooks = () => {
         </Container>
       </div>
       <Container>
+   
         <h2 className='pt-5'>
           {userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`

@@ -46,10 +46,10 @@ console.log(correctPw)
      if(context.user){
       const updatedUser =await User.findOneAndUpdate(
         { _id: context.user._id },
-        { $addToSet: { savedBooks:input } },
+        { $addToSet: { savedBooks: input } },
         { new: true }
       );
-      console.log(updatedUser)
+      
       return updatedUser;
      }
 
@@ -59,11 +59,12 @@ console.log(correctPw)
     
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
+        const updatedUser =await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { bookId: bookId } },
           { new: true }
         );
+        return updatedUser;
       }
       throw AuthenticationError;
     },
