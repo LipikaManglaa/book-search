@@ -6,12 +6,12 @@ const { signToken } = require('../utils/auth');
 module.exports = {
   // get a single user by either their id or their username
   async getSingleUser({ user = null, params }, res) {
-    console.log("Hello")
+   
 
     const foundUser = await User.findOne({
       $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
     });
-console.log(foundUser)
+
     if (!foundUser) {
       return res.status(400).json({ message: 'Cannot find a user with this id!' });
     }
@@ -27,7 +27,7 @@ console.log(foundUser)
     }
   
     const token = signToken(user);
-    console.log(token)
+   
     res.json({ token, user });
   },
   // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
@@ -64,13 +64,17 @@ console.log(foundUser)
       return res.status(400).json(err);
     }
   },
+
+  
   // remove a book from `savedBooks`
   async deleteBook({ user, params }, res) {
+    console.log({params})
     const updatedUser = await User.findOneAndUpdate(
       { _id: user._id },
       { $pull: { savedBooks: { bookId: params.bookId } } },
       { new: true }
     );
+  
     if (!updatedUser) {
       return res.status(404).json({ message: "Couldn't find user with this id!" });
     }
