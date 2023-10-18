@@ -20,13 +20,13 @@ Mutation: {
  
  login: async (parent, { email, password }) => {
    const user = await User.findOne({ email });
-console.log(user)
+
    if (!user) {
      throw AuthenticationError;
    }
 
    const correctPw = await user.isCorrectPassword(password);
-console.log(correctPw)
+
    if (!correctPw) {
      throw AuthenticationError;
    }
@@ -57,6 +57,7 @@ console.log(correctPw)
       throw AuthenticationError;
     },
     removeBook: async (_parent, { book }, context) => {
+      console.log(context.user)
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -71,18 +72,8 @@ console.log(correctPw)
 };
 
     
-    removeBook: async (parent, { book }, context) => {
-      if (context.user) {
-        const updatedUser =await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { bookId: book } },
-          { new: true }
-        );
-        return updatedUser;
-      }
-      throw AuthenticationError;
-    },
-  },
-};
+   
+
+  
 
 module.exports = resolvers;
