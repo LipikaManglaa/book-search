@@ -56,12 +56,12 @@ Mutation: {
 
       throw AuthenticationError;
     },
-    removeBook: async (_parent, { book }, context) => {
-      console.log(context.user)
+    removeBook: async (_parent, { bookId }, context) => {
+    
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: book } },
+          { $pull: { savedBooks: { bookId } } },
           { new: true }
         );
         return updatedUser;
