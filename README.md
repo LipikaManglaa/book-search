@@ -10,7 +10,7 @@ This application is used for searching for books using the Google books API. A u
 * [GitHub Repository](https://github.com/LipikaManglaa/book-search.git)
 * [Deployed GitHub IO]  git@github.com:LipikaManglaa/book-search.git
 
-Live Link:
+Live Link:https://infinite-scrubland-55641-aacce308afc1.herokuapp.com/
 
 ## Table of Contents
 
